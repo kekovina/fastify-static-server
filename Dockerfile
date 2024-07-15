@@ -2,9 +2,8 @@ FROM node:22.4.0-alpine
 
 WORKDIR /fastify-static-server
 COPY package.json .
-COPY package-lock.json .
 
-RUN npm ci
+RUN npm i
 COPY . .
 RUN npm run build
 

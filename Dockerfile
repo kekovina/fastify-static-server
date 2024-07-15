@@ -1,12 +1,23 @@
-FROM node:22.4.0-alpine
 
-WORKDIR /fastify-static-server
-COPY package.json .
+FROM node:22-alpine AS build
 
+WORKDIR /app
+
+COPY package.json package-lock.json ./
 RUN npm i
 COPY . .
 RUN npm run build
 
-ENV BEARER_TOKENS=${BEARER_TOKENS}
+FROM node:22-alpine
 
-CMD npm start
+WORKDIR /app
+
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/package.json ./package.json
+COPY --from=build /app/package-lock.json ./package-lock.json
+
+RUN npm i --only=production
+
+EXPOSE 3001
+
+CMD ["node", "dist/server.js"]

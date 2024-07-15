@@ -4,6 +4,7 @@ FROM node:22-alpine AS build
 WORKDIR /app
 
 COPY package.json ./
+ENV HUSKY=0
 RUN npm i
 COPY . .
 RUN npm run build

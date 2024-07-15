@@ -21,4 +21,4 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: kekovina/fastify-static-server
-          tags: ${{ github.run_number }}, latest
+          tags: latest

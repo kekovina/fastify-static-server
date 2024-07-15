@@ -9,7 +9,7 @@
     "_clean": "del-cli ./dist",
     "build": "npm run _clean && rollup -c ./rollup.config.mjs",
     "watch": "cross-env DEBUG=app:* npm run build -- -w",
-    "start": "cross-env DEBUG=app:* node ./dist/main.js",
+    "start": "cross-env DEBUG=app:* node ./dist/index.js",
     "test": "jest"
   },
   "lint-staged": {

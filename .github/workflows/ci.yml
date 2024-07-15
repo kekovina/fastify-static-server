@@ -7,11 +7,11 @@ on:
   # publish on pushes to the main branch (image tagged as "latest")
   push:
     branches:
-      - master
+      - main
 
 jobs:
 
-  publish_gh:
+  publish_image:
     runs-on: "ubuntu-20.04"
     steps:
       - uses: actions/checkout@v2

@@ -15,13 +15,6 @@ jobs:
     runs-on: "ubuntu-20.04"
     steps:
       - uses: actions/checkout@v2
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          repository: kekovina/fastify-static-server
-          tags: ${{ github.run_number }}, latest
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:

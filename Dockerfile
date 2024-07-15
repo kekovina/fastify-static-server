@@ -5,6 +5,7 @@ COPY package.json .
 
 RUN npm i --ci
 COPY . .
+RUN npm run build
 
 ENV BEARER_TOKENS=${BEARER_TOKENS}
 

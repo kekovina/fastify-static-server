@@ -20,6 +20,4 @@ COPY --from=build /app/package-lock.json ./package-lock.json
 RUN npm pkg set scripts.prepare="echo 'skip prepare'"
 RUN npm i --production
 
-EXPOSE 3001
-
 CMD ["node", "dist/index.js"]

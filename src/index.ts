@@ -1,4 +1,5 @@
 import { buildApp, AppOptions } from './app';
+import { PORT } from './config';
 
 const options: AppOptions = {
   logger: true,
@@ -9,8 +10,8 @@ const start = async () => {
 
   try {
     await app.listen({
-      port: 3001,
-      host: 'localhost',
+      port: PORT,
+      host: '0.0.0.0',
     });
 
   } catch (err) {

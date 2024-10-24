@@ -16,7 +16,6 @@ class AppController {
 
     const { collection } = request.params
     const collectionPath = path.join(FOLDER_PATH, collection)
-    console.log(collectionPath)
 
     if (!(await checkOrCreateCollectionExists(collectionPath)))
       return reply.status(500).send({ code: 'CREATE_COLLECTION_DIR_ERROR', message: 'Error due create collection directory.' })
@@ -24,17 +23,23 @@ class AppController {
     try {
       let uploadedCount = 0, errorsCount = 0
       let errors: string[] = []
-      for await (const part of parts) {
-        const { fieldname, mimetype } = part
-        if (!AVAILABLE_MIMETYPES.includes(mimetype)) continue
-        const filePath = path.join(collectionPath, fieldname)
-        pump(part.file, fs.createWriteStream(filePath))
-          .on('finish', () => uploadedCount++)
-          .on('error', (err) => {
-            errorsCount++
-            errors.push(err.message)
-          })
-      }
+      await new Promise(async (resolve, reject) => {
+        for await (const part of parts) {
+          const { fieldname, mimetype } = part
+          if (!AVAILABLE_MIMETYPES.includes(mimetype)) continue
+          const filePath = path.join(collectionPath, fieldname)
+          pump(part.file, fs.createWriteStream(filePath))
+            .on('finish', () => {
+              uploadedCount += 1
+              resolve(uploadedCount)
+            })
+            .on('error', (err) => {
+              errorsCount += 1
+              errors.push(err.message)
+              reject(err)
+            })
+        }
+      })
       return reply.send({ message: 'OK', uploadedCount, errorsCount, errors })
     } catch (e: any) {
       return reply.status(500).send({ code: 'FILE_WRITE_ERROR', message: e.message });

@@ -3,7 +3,7 @@
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![RollupJS](https://img.shields.io/badge/RollupJS-ef3335?style=for-the-badge&logo=rollup.js&logoColor=white)
 
-Easy to use Node.js server for statics
+This server allows you to create and manage image collections using the rest API.
 
 
 ## How to use

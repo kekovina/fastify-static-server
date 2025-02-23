@@ -8,39 +8,23 @@ Easy to use Node.js server for statics
 
 ## How to use
 
-### Download
+### Docker CLI
 
-```
-  git clone https://github.com/kekovina/fastify-static-server.git
-```
-or
-
-```
-  git@github.com:kekovina/fastify-static-server.git
+```bash
+  docker pull kekovina/fastify-static-server:latest
+  docker run --env "BEARER_TOKENS=<TOKENS>" -v /path/to/data:/ststic-data/static -d kekovina/fastify-static-server:latest
 ```
 
-
-### Manually
-
-0. ``` npm i ```
-
-1. Copy `.env.example` and rename to `.env`
-
-2. Set `Bearer tokens` in `.env`
-
-3. ```npm run start``` 
-
-### Docker
+### Docker compose
 
 1. Add `docker-compose.yml`
 
 ```yml
 ...
 static-server:
+    image: kekovina/fastify-static-server:latest
     container_name: static-server
     restart: always
-    build:
-      context: '.'
     ports:
       - 8081:3000
     environment:
@@ -50,8 +34,11 @@ static-server:
 
 ...
 ```
-BEARER_TOKENS is array(like a ``` ['token', 'token2'] ```)
-
+#### Environment
+| env | description | default | example |
+| :-------- | :-------- | :-------- | :-------- | 
+| `BEARER_TOKENS`   | array of authorized tokens | - |  ["token1", "token2"] |
+| `PORT`   | server port | 3000 |  5050 |
 
 ## API Reference
 

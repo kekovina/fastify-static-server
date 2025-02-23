@@ -50,7 +50,7 @@ static-server:
 
 ...
 ```
-
+BEARER_TOKENS is array(like a ``` ['token', 'token2'] ```)
 
 
 ## API Reference

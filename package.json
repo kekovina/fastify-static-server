@@ -9,8 +9,9 @@
     "_clean": "del-cli ./dist",
     "build": "npm run _clean && rollup -c ./rollup.config.mjs",
     "watch": "cross-env DEBUG=app:* npm run build -- -w",
-    "start": "cross-env DEBUG=app:* node ./dist/index.js",
-    "test": "jest"
+    "start": "cross-env DEBUG=a,pp:* node ./dist/index.js",
+    "test": "jest",
+    "version": "changeset version"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -41,6 +42,7 @@
     "serve-static": "^1.15.0"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.4",
     "@rollup/plugin-run": "^3.1.0",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/node": "^20.14.10",

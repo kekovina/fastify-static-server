@@ -6,6 +6,10 @@ on:
       - main
   release:
     types: [published]
+    
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   version_or_release:

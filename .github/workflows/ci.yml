@@ -30,8 +30,8 @@ jobs:
       - name: Create release pull request or apply version
         uses: changesets/action@v1
         with:
-          version: npm run version
-          commit: "ci: apply version"
+          version: npx changeset version
+          commit: "ci: apply version bump"
           createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -60,6 +60,10 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: .
           push: true
-          tags: kekovina/fastify-static-server:${{ env.VERSION }}
+          context: .
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/fastify-static-server:latest
+            ${{ secrets.DOCKER_USERNAME }}/fastify-static-server:${{ github.ref_name }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}

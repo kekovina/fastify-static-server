@@ -2,4 +2,4 @@
 "fastify-static-server": patch
 ---
 
-feat: docker npm version
+Добавлена поддержка changeset и docker version ci

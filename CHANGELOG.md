@@ -1,5 +1,11 @@
 # fastify-static-server
 
+## 0.1.4
+
+### Patch Changes
+
+- e70d51d: fix: husky prepare script removed
+
 ## 0.1.3
 
 ### Patch Changes

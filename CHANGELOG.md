@@ -1,5 +1,11 @@
 # fastify-static-server
 
+## 0.1.5
+
+### Patch Changes
+
+- 8876abe: fix: ci without npm publish
+
 ## 0.1.4
 
 ### Patch Changes

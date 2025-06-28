@@ -1,5 +1,13 @@
 # fastify-static-server
 
+## 0.1.7
+
+### Patch Changes
+
+- [#12](https://github.com/kekovina/fastify-static-server/pull/12) [`b4b0eca`](https://github.com/kekovina/fastify-static-server/commit/b4b0eca71c4c130b0aa42dede3d9fc0d3e404816) Thanks [@kekovina](https://github.com/kekovina)! - fix: ci flow change
+
+- [#13](https://github.com/kekovina/fastify-static-server/pull/13) [`ffa9c31`](https://github.com/kekovina/fastify-static-server/commit/ffa9c31709a3e705a6a3acaf01d83b77dec54198) Thanks [@kekovina](https://github.com/kekovina)! - fix: changeset-changelog plugin
+
 ## 0.1.6
 
 ### Patch Changes

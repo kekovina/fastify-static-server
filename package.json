@@ -40,6 +40,7 @@
     "serve-static": "^1.15.0"
   },
   "devDependencies": {
+    "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.4",
     "@rollup/plugin-run": "^3.1.0",
     "@rollup/plugin-typescript": "^11.1.6",

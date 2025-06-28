@@ -8,53 +8,36 @@ on:
     types: [published]
 
 jobs:
-  version_or_create_release_pr:
+  maybe_create_release_pr:
     if: github.event_name == 'push'
-    name: Version or Create Release PR
+    name: Create release PR if there are changesets
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
       - run: npm ci
 
-      - name: Create release pull request or apply version bump
+      - name: Check for changesets
+        id: changeset_check
+        run: |
+          if [ -z "$(ls .changeset 2>/dev/null)" ]; then
+            echo "has_changesets=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changesets=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create release pull request
+        if: steps.changeset_check.outputs.has_changesets == 'true'
         uses: changesets/action@v1
         with:
           version: npx changeset version
           commit: "ci: apply version bump"
           createGithubReleases: true
-          publish: false # ⛔ отключаем попытки publish в npm
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  tag_version:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: version_or_create_release_pr
-    name: Tag version (no npm publish)
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - run: npm ci
-
-      - name: Create Git tag without publishing to npm
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          npx changeset tag
-          git push --follow-tags
+          publish: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
